@@ -5,7 +5,7 @@ const port = process.env.PORT
 const app = express()
 
 app.use(cors())
-app.use('/Login', (request, result) => {
+app.use((request, result) => {
     result.send(
         {
             token: 'test123'
