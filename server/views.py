@@ -1,3 +1,4 @@
+import datetime
 import json
 
 from django.contrib.auth import authenticate, login
@@ -75,3 +76,18 @@ def register_in_lottery(request):
 def registered_lotteries(request):
     serialized = LotterySerializer(request.user.registered_lotteries.all(), many=True)
     return Response(serialized.data)
+
+
+@api_view(['post'])
+def create_lottery(request):
+    if not request.user.is_superuser:
+        return Response({'message': 'Not Allowed'})
+    data = {
+        'start': datetime.datetime.now().date(),
+        'end': datetime.datetime.now().date(),
+    }
+    serializer = LotterySerializer(data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'message': 'Lottery Created'})
+    return Response(serializer.errors)

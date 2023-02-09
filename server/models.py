@@ -22,9 +22,9 @@ class Profile(models.Model):
 class Lottery(models.Model):
     start = models.DateField(primary_key=True)
     winner = models.ManyToManyField(User, blank=True, related_name='won_lotteries')
-    participants = models.ManyToManyField(User, blank=True,related_name='registered_lotteries')
+    participants = models.ManyToManyField(User, blank=True, related_name='registered_lotteries')
     end = models.DateField()
-    transaction_completed = models.BooleanField()
+    transaction_completed = models.BooleanField(default=False)
 
     def get_current_lottery(self):
         return self.objects.all().last()

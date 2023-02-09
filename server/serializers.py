@@ -30,3 +30,7 @@ class LotterySerializer(serializers.ModelSerializer):
     class Meta:
         model = Lottery
         fields = ('start', 'end')
+
+    def create(self, validated_data):
+        user = Lottery.objects.create(**validated_data)
+        return user
