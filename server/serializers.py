@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from .models import Profile
+from .models import Profile, Lottery
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -24,3 +24,9 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+
+
+class LotterySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lottery
+        fields = ('start', 'end')
