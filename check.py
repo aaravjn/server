@@ -12,7 +12,7 @@ r = requests.post(url, data=json.dumps(data), headers=headers)
 cookie = r.cookies.get_dict()
 headers['X-csrftoken'] = cookie['csrftoken']
 
-url = "http://127.0.0.1:8000/won-lotteries/"
+url = "http://127.0.0.1:8000/profile/"
 
 r = requests.get(url, cookies=cookie, data=json.dumps(data), headers=headers)
-print(r.json())
+print(r.json().__str__())
